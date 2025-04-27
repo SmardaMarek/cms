@@ -2,6 +2,6 @@
     @csrf
     @method('DELETE')
     <button type="submit" class="text-red-600">
-        <i class="fa fa-trash" aria-hidden="true"></i>
+        <i class="fa fa-trash" aria-hidden="true"></i> Smazat
     </button>
 </form>

@@ -12,11 +12,15 @@
           
                     <h1 class="text-3xl font-bold mb-4">{{ $new->title }}</h1>
 
-                    @if ($new->main_image)
-                        <img src="{{ asset('storage/' . $new->main_image) }}" alt="Main image" class="mb-4 rounded">
-                    @endif
+                    <div class="text-xl mb-4">{{ $new->perex }}</div>
 
-                    <div class="text-gray-700 mb-6">
+                    @if ($new->main_image)
+                        <div class="max-w-xs">
+                            <img src="{{ asset('storage/' . $new->main_image) }}" alt="Main image" class="w-full h-auto object-contain">
+                        </div>
+                    @endif
+                
+                    <div class="text-gray-700 mb-6 mt-6">
                         {!! nl2br(e($new->content)) !!}
                     </div>
 

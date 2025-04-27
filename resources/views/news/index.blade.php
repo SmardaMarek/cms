@@ -43,8 +43,8 @@
                                 <div class="bg-gray-100 rounded-lg shadow p-4 grid grid-cols-4 gap-4 items-center">
                                     <!-- Obrázek -->
                                     <div class="col-span-1">
-                                        @if ($new->image)
-                                            <img src="{{ asset('storage/' . $new->image) }}" alt="{{ $new->title }}" class="w-full h-32 object-cover rounded">
+                                        @if ($new->main_image)
+                                            <img src="{{ asset('storage/' . $new->main_image) }}" alt="{{ $new->title }}" class="w-full h-32 object-cover rounded">
                                         @else
                                             <div class="w-full h-32 bg-gray-200 flex items-center justify-center rounded">
                                                 <span class="text-gray-500">Bez obrázku</span>
@@ -52,10 +52,13 @@
                                         @endif
                                     </div>
                 
-                                    <!-- Text a Akce -->
+                                    <!-- Akce -->
                                     <div class="col-span-3 flex flex-col justify-between h-full">
                                         <div class="text-xl font-semibold">
                                             {{ $new->title }}
+                                        </div>
+                                        <div class="font-semibold">
+                                            {{ $new->perex }}
                                         </div>
                                         <div class="mt-2 flex space-x-4">
                                             <a href="{{ route('news.show', $new->id) }}" class="text-blue-500 hover:underline flex items-center">
