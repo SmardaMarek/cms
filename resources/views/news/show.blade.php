@@ -7,10 +7,29 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if (session()->has('message'))
+    
+                <div class="alert alert-success bg-green-300 p-4 text-center">
+    
+                    {{ session('message') }}
+    
+                </div>
+            
+            @elseif (session()->has('error'))
+                <div class="alert alert-error">
+        
+                    {{ session('error') }}
+
+                </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
           
                     <h1 class="text-3xl font-bold mb-4">{{ $new->title }}</h1>
+                    <a href="{{ route('news.edit', $new->id) }}" class="text-green-500 hover:underline flex items-center">
+                        <i class="fa fa-edit mr-1"></i> Upravit
+                    </a>
 
                     <div class="text-xl mb-4">{{ $new->perex }}</div>
 
@@ -27,6 +46,8 @@
                     <a href="{{ route('news') }}" class="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
                         <- Zpět
                     </a>
+
+                    @include('news.partials.delete-form', ['news' => $new])
      
                 </div>
             </div>

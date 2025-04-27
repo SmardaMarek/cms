@@ -23,6 +23,7 @@ class NewsController extends Controller
         $data = $request->validate([
             'title' => 'required|string',
             'content' => 'required|string',
+            'perex' => 'required|string',
             'main_image' => 'nullable|image|max:2048',
         ]);
 
@@ -41,6 +42,25 @@ class NewsController extends Controller
         return view('news.show', compact('new'));
     }
 
+    public function edit($id)
+    {
+        $new = News::findOrFail($id);
+        return view('news.edit', compact('new'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'perex' => 'required|string',
+            'main_image' => 'nullable|image|max:2048',
+        ]);
+        $new = News::findOrFail($id);
+        $new->update($data);
+        session()->flash('message', 'Aktualita úspěšně upravena.');
+        return redirect()->route('news.show', $new->id);
+    }
     public function delete($id)
     {
 

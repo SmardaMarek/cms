@@ -66,6 +66,11 @@
                                             </a>
                 
                                             @include('news.partials.delete-form', ['news' => $new])
+
+                                            <a href="{{ route('news.edit', $new->id) }}" class="text-green-500 hover:underline flex items-center">
+                                                <i class="fa fa-edit mr-1"></i> Upravit
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>
