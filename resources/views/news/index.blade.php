@@ -7,6 +7,26 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            @if (session()->has('message'))
+    
+                <div class="alert alert-success bg-green-300 p-4 text-center">
+    
+                    {{ session('message') }}
+    
+                </div>
+            
+            @elseif (session()->has('error'))
+                <div class="alert alert-error">
+        
+                    {{ session('error') }}
+
+                </div>
+            @endif
+    
+        </div>
+
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <a href="{{ route('news.create') }}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">

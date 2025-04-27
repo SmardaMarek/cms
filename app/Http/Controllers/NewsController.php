@@ -31,8 +31,8 @@ class NewsController extends Controller
         }
 
         News::create($data);
-
-        return redirect()->route('news')->with('success', 'Aktualita vytvořena.');
+        session()->flash('message', 'Aktualita úspěšně vytvořena.');
+        return redirect()->route('news');
     }
 
     public function show($id)
@@ -46,8 +46,8 @@ class NewsController extends Controller
 
         $new = News::findOrFail($id);
         $new->delete();
-
-        return redirect()->route('news')->with('success', 'Aktualita smazána.');
+        session()->flash('message', 'Aktualita úspěšně smazána.');
+        return redirect()->route('news');
     }
 
 }
