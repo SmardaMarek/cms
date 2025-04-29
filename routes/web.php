@@ -20,6 +20,7 @@ Route::get('/aktuality-create', [NewsController::class, 'create'])->middleware([
 Route::delete('/aktuality-delete/{id}', [NewsController::class, 'delete'])->middleware(['auth', 'verified'])->name('news.delete');
 Route::get('/aktuality-edit/{id}', [NewsController::class, 'edit'])->middleware(['auth', 'verified'])->name('news.edit');
 Route::put('/aktuality/{id}', [NewsController::class, 'update'])->middleware(['auth', 'verified'])->name('news.update');
+Route::post('/aktuality-publish/{id}', [NewsController::class, 'publish'])->name('news.publish');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

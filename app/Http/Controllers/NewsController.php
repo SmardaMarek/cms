@@ -70,4 +70,15 @@ class NewsController extends Controller
         return redirect()->route('news');
     }
 
+    public function publish($id)
+    {
+        $new = News::findOrFail($id);
+        $new->published_at = now();
+        $new->save();
+        session()->flash('message', 'Aktualita úspěšně vydána.');
+        return redirect()->route('news.show', $new->id);
+    }
+
+    //TODO: add upload images and galery
+
 }

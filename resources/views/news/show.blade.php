@@ -52,7 +52,10 @@
                         {!! nl2br(e($new->content)) !!}
                     </div>
 
-                    @include('news.partials.delete-form', ['news' => $new, 'index' => false])
+                    <div class="flex justify-between items-start mb-4">
+                        @include('news.partials.publish-form', ['new' => $new])
+                        @include('news.partials.delete-form', ['new' => $new, 'index' => false])
+                    </div>
      
                 </div>
             </div>
