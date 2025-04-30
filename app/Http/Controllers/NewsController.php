@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Http\Requests\NewsRequest;
+use App\Services\NewsService;
 
 class NewsController extends Controller
 {
+
+    //TODO: add upload images and galery
+
+    //TODO edit routing? 
+
     public function index()
     {
         $news = News::latest()->paginate(10);
@@ -18,18 +25,12 @@ class NewsController extends Controller
         return view('news.create');
     }
 
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'perex' => 'required|string',
-            'main_image' => 'nullable|image|max:2048',
-        ]);
 
-        if ($request->hasFile('main_image')) {
-            $data['main_image'] = $request->file('main_image')->store('aktuality', 'public');
-        }
+    public function store(NewsRequest $request, NewsService $newsService)
+    {
+        $data = $request->validated();
+
+        $data['main_image'] = $newsService->handleUploadedImage($request->file('main_image'));
 
         News::create($data);
         session()->flash('message', 'Aktualita úspěšně vytvořena.');
@@ -48,17 +49,18 @@ class NewsController extends Controller
         return view('news.edit', compact('new'));
     }
 
-    public function update(Request $request, $id)
+    public function update(NewsRequest $request, NewsService $newsService, $id)
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'perex' => 'required|string',
-            'main_image' => 'nullable|image|max:2048',
-        ]);
+        $data = $request->validated();
         $new = News::findOrFail($id);
+
+        if ($request->hasFile('main_image')) {
+            $data['main_image'] = $newsService->handleUploadedImage($request->file('main_image'));
+        }
         $new->update($data);
+
         session()->flash('message', 'Aktualita úspěšně upravena.');
+
         return redirect()->route('news.show', $new->id);
     }
     public function delete($id)
@@ -78,7 +80,5 @@ class NewsController extends Controller
         session()->flash('message', 'Aktualita úspěšně vydána.');
         return redirect()->route('news.show', $new->id);
     }
-
-    //TODO: add upload images and galery
 
 }

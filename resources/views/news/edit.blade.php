@@ -8,16 +8,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
-                <form method="POST" action="{{ route('news.update', $new->id) }}">
+                <form method="POST" action="{{ route('news.update', $new->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <!-- Title -->
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700">Název</label>
                         <input type="text" name="title" id="title" required
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                             value="{{ $new->title }}">
                     </div>
-
+                    <!-- Perex -->
                     <div>
                         <label for="perex" class="block text-sm font-medium text-gray-700">Úvod</label>
                         <input type="text" name="perex" id="perex" required
@@ -25,7 +26,7 @@
                             value="{{ $new->perex }}">
                     </div>
             
-                    <!-- Obsah -->
+                    <!-- Content -->
                     <div>
                         <label for="content" class="block text-sm font-medium text-gray-700">Obsah</label>
                         <textarea name="content" id="content" rows="6" required
@@ -33,7 +34,20 @@
                     </div>
                     
             
-                    <!-- TODO: Obrázek -->
+                    <!-- Actual image -->
+                        @if ($new->main_image)
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Aktuální obrázek:</p>
+                            <img src="{{ asset('storage/' . $new->main_image) }}" alt="Main image" class="w-48 h-auto rounded shadow">
+                        </div>
+                    @endif
+
+                    <!-- New image -->
+                    <div>
+                        <label for="main_image" class="block text-sm font-medium text-gray-700">Změnit obrázek</label>
+                        <input type="file" name="main_image" id="main_image"
+                            class="mt-1 block w-full text-gray-700">
+                    </div>
                     
             
                     <!-- Submit button -->

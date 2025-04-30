@@ -34,7 +34,7 @@
             
                     <!-- Obrázek -->
                     <div>
-                        <label for="image" class="block text-sm font-medium text-gray-700">Hlavní obrázek</label>
+                        <label for="main_image" class="block text-sm font-medium text-gray-700">Hlavní obrázek</label>
                         <input type="file" name="main_image" id="main_image"
                             class="mt-1 block w-full text-gray-700">
                     </div>
