@@ -75,8 +75,8 @@ class NewsController extends Controller
     public function publish($id)
     {
         $new = News::findOrFail($id);
-        $new->published_at = now();
-        $new->save();
+        News::publish($new);
+
         session()->flash('message', 'Aktualita úspěšně vydána.');
         return redirect()->route('news.show', $new->id);
     }

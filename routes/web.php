@@ -8,19 +8,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+Route::get('admin/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-//Aktuality
-Route::get('/aktuality', [NewsController::class, 'index'])->middleware(['auth', 'verified'])->name('news');
-Route::get('/aktuality/{id}', [NewsController::class, 'show'])->middleware(['auth', 'verified'])->name('news.show');
-Route::post('/aktuality', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('news.store');
-Route::get('/aktuality-create', [NewsController::class, 'create'])->middleware(['auth', 'verified'])->name('news.create');
-Route::delete('/aktuality-delete/{id}', [NewsController::class, 'delete'])->middleware(['auth', 'verified'])->name('news.delete');
-Route::get('/aktuality-edit/{id}', [NewsController::class, 'edit'])->middleware(['auth', 'verified'])->name('news.edit');
-Route::put('/aktuality/{id}', [NewsController::class, 'update'])->middleware(['auth', 'verified'])->name('news.update');
-Route::post('/aktuality-publish/{id}', [NewsController::class, 'publish'])->name('news.publish');
+//Admin - Aktuality
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
+    Route::get('/aktuality', [NewsController::class, 'index'])->name('news');
+    Route::get('/aktuality/{id}', [NewsController::class, 'show'])->name('news.show');
+    Route::post('/aktuality', [NewsController::class, 'store'])->name('news.store');
+    Route::get('/aktuality-create', [NewsController::class, 'create'])->name('news.create');
+    Route::delete('/aktuality-delete/{id}', [NewsController::class, 'delete'])->name('news.delete');
+    Route::get('/aktuality-edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
+    Route::put('/aktuality/{id}', [NewsController::class, 'update'])->name('news.update');
+    Route::post('/aktuality-publish/{id}', [NewsController::class, 'publish'])->name('news.publish');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
