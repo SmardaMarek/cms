@@ -52,9 +52,17 @@
                         {!! nl2br(e($new->content)) !!}
                     </div>
 
-                    <div class="flex justify-between items-start mb-4">
-                        @include('news.partials.publish-form', ['new' => $new])
-                        @include('news.partials.delete-form', ['new' => $new, 'index' => false])
+                    <div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            @foreach ($new->images as $image)
+                                <img src="{{ asset('storage/' . $image->path) }}" class="rounded shadow">
+                            @endforeach
+                        </div>                        
+                    </div>
+
+                    <div class="flex justify-between items-start mb-4 mt-2">
+                        @include('admin.news.partials.publish-form', ['new' => $new])
+                        @include('admin.news.partials.delete-form', ['new' => $new, 'index' => false])
                     </div>
      
                 </div>

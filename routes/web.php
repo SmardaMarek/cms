@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('public.welcome');
 });
 
 Route::get('admin/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //Admin - Aktuality
@@ -22,6 +22,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/aktuality-edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
     Route::put('/aktuality/{id}', [NewsController::class, 'update'])->name('news.update');
     Route::post('/aktuality-publish/{id}', [NewsController::class, 'publish'])->name('news.publish');
+    Route::delete('/aktuality-image-delete/{id}', [NewsController::class, 'deleteImage'])->name('news.image.delete');
+
 });
 
 Route::middleware('auth')->group(function () {

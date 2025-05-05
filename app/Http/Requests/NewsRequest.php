@@ -19,6 +19,8 @@ class NewsRequest extends FormRequest
             'perex' => 'required|string',
             'main_image' => 'nullable|image|max:2048',
             'published_at' => 'nullable|date',
+            'gallery_images' => 'nullable|array',
+            'gallery_images.*' => 'image|max:2048',
         ];
     }
 }

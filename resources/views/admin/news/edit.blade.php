@@ -35,7 +35,7 @@
                     
             
                     <!-- Actual image -->
-                        @if ($new->main_image)
+                    @if ($new->main_image)
                         <div>
                             <p class="text-sm text-gray-600 mb-1">Aktuální obrázek:</p>
                             <img src="{{ asset('storage/' . $new->main_image) }}" alt="Main image" class="w-48 h-auto rounded shadow">
@@ -48,6 +48,22 @@
                         <input type="file" name="main_image" id="main_image"
                             class="mt-1 block w-full text-gray-700">
                     </div>
+
+                    <!-- Images -->
+                    <div>
+                        <label for="gallery_images" class="block text-sm font-medium text-gray-700">Přidat obrázky do galerie</label>
+                        <input 
+                            type="file" 
+                            name="gallery_images[]" 
+                            id="gallery_images"
+                            multiple 
+                            accept="image/*" 
+                            class="mt-2 block w-full border-gray-300 rounded-md shadow-sm"
+                        >
+                                              
+                    </div>
+                        
+                    </div>
                     
             
                     <!-- Submit button -->
@@ -58,6 +74,17 @@
                         </button>
                     </div>
                 </form>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                    @foreach ($new->images as $image)
+                        <div class="flex flex-col items-start">
+                            <img src="{{ asset('storage/' . $image->path) }}" class="rounded shadow max-w-full h-auto mb-2">
+                            
+                            @include('admin.news.partials.delete-image-form', ['image' => $image])
+                        </div>
+                    @endforeach
+                </div>
+               
             </div>
         </div>
     </div>

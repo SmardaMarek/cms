@@ -11,7 +11,7 @@
                 <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
             
-                    <!-- Název -->
+                    <!-- Title -->
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700">Název</label>
                         <input type="text" name="title" id="title" required
@@ -25,18 +25,34 @@
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                     </div>
             
-                    <!-- Obsah -->
+                    <!-- Content -->
                     <div>
                         <label for="content" class="block text-sm font-medium text-gray-700">Obsah</label>
                         <textarea name="content" id="content" rows="6" required
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
                     </div>
             
-                    <!-- Obrázek -->
+                    <!-- Main image -->
                     <div>
                         <label for="main_image" class="block text-sm font-medium text-gray-700">Hlavní obrázek</label>
                         <input type="file" name="main_image" id="main_image"
                             class="mt-1 block w-full text-gray-700">
+                    </div>
+
+                    <!-- Images -->
+                    <div>
+                        <div>
+                            <label for="gallery_images" class="block text-sm font-medium text-gray-700">Obrázky galerie</label>
+                            <input 
+                                type="file" 
+                                name="gallery_images[]" 
+                                id="gallery_images"
+                                multiple 
+                                accept="image/*" 
+                                class="mt-2 block w-full border-gray-300 rounded-md shadow-sm"
+                            >
+                        </div>
+                        
                     </div>
             
                     <!-- Submit button -->
