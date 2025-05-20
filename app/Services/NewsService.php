@@ -5,7 +5,7 @@ use Illuminate\Http\UploadedFile;
 use App\Models\News;
 use App\Repositories\NewsRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use \Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class NewsService
 {
@@ -65,11 +65,8 @@ class NewsService
     }
     public function handleUploadedMainImage(?UploadedFile $image, $new): ?string
     {
-        if ($image !== null) {
-            return $image->store("aktuality/hlavni-obrazek/{$new->id}", 'public');
-        }
+        return $image?->store("aktuality/hlavni-obrazek/$new->id", 'public');
 
-        return null;
     }
 
     public function handleUploadedImages(?array $images, $new): ?array
@@ -78,7 +75,7 @@ class NewsService
         if (is_array($images)) {
             foreach ($images as $image) {
                 if ($image instanceof UploadedFile) {
-                    $paths[] = $image->store("aktuality/galerie/{$new->id}", 'public');
+                    $paths[] = $image->store("aktuality/galerie/$new->id", 'public');
                 }
             }
             return $paths;
